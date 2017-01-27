@@ -224,6 +224,12 @@ var StorageDialog = function(editorUi, fn)
 	{
 		addLogo(IMAGE_PATH + '/onedrive-logo.svg', mxResources.get('oneDrive'), App.MODE_ONEDRIVE, 'oneDrive');
 	}
+
+	if (typeof window.BoxClient === 'function')
+	{
+		// TODO: does mxResource for box exist?
+		addLogo(IMAGE_PATH + '/box-logo.svg', mxResources.get('box'), App.MODE_BOX, 'box');
+	}
 	
 	if (!mxClient.IS_IOS || urlParams['storage'] == 'device')
 	{
@@ -357,6 +363,16 @@ var SplashDialog = function(editorUi)
 			help.setAttribute('href', 'https://support.draw.io/display/DO/Using+draw.io+with+OneDrive');
 		}
 	}
+	else if (editorUi.mode == App.MODE_BOX)
+	{
+		logo.src = IMAGE_PATH + '/box-logo.svg';
+		service = mxResources.get('box');
+		
+		if (help != null)
+		{
+			help.setAttribute('href', 'https://support.draw.io/display/DO/Using+draw.io+with+Box');
+		}
+	}
 	else if (editorUi.mode == App.MODE_BROWSER)
 	{
 		logo.src = IMAGE_PATH + '/osa_database.png';
@@ -442,6 +458,10 @@ var SplashDialog = function(editorUi)
 	else if (editorUi.mode == App.MODE_ONEDRIVE)
 	{
 		storage = mxResources.get('oneDrive');
+	}
+	else if (editorUi.mode == App.MODE_BOX)
+	{
+		storage = mxResources.get('box');
 	}
 	else if (editorUi.mode == App.MODE_DEVICE)
 	{
@@ -2003,7 +2023,7 @@ var IframeDialog = function(editorUi, image, link)
 		var title = (file != null && file.getTitle() != null) ? file.getTitle() : this.defaultFilename;
 		
 		if (link && file != null && (urlInput.value != '' || file.constructor == DriveFile ||
-			file.constructor == DropboxFile || file.constructor == OneDriveFile))
+			file.constructor == DropboxFile || file.constructor == OneDriveFile || file.constructor == BoxFile))
 		{
 			previewBtn.removeAttribute('disabled');
 			copyBtn.removeAttribute('disabled');
@@ -2086,7 +2106,7 @@ var IframeDialog = function(editorUi, image, link)
 			iframeInput.removeAttribute('disabled');
 		}
 		else if (!image && !link && file != null && (file.constructor == DriveFile ||
-			file.constructor == DropboxFile || file.constructor == OneDriveFile))
+			file.constructor == DropboxFile || file.constructor == OneDriveFile || file.constructor == BoxFile))
 		{
 			previewBtn.removeAttribute('disabled');
 			copyBtn.removeAttribute('disabled');
@@ -3241,6 +3261,10 @@ var NewDialog = function(editorUi, compact, showName, callback)
 	{
 		logo.src = IMAGE_PATH + '/onedrive-logo.svg';
 	}
+	else if (editorUi.mode == App.MODE_BOX)
+	{
+		logo.src = IMAGE_PATH + '/box-logo.svg';
+	}
 	else if (editorUi.mode == App.MODE_BROWSER)
 	{
 		logo.src = IMAGE_PATH + '/osa_database.png';
@@ -3274,6 +3298,10 @@ var NewDialog = function(editorUi, compact, showName, callback)
 	else if (editorUi.mode == App.MODE_ONEDRIVE && editorUi.oneDrive != null)
 	{
 		ext = editorUi.oneDrive.extension;
+	}
+	else if (editorUi.mode == App.MODE_BOX && editorUi.box != null)
+	{
+		ext = editorUi.box.extension;
 	}
 	
 	var nameInput = document.createElement('input');
@@ -3325,6 +3353,7 @@ var NewDialog = function(editorUi, compact, showName, callback)
 				
 			if (title != null && title.length > 0)
 			{
+				// TODO: do we need to include box in this check?
 				var tempMode = (editorUi.mode == App.MODE_ONEDRIVE || (editorUi.mode == App.MODE_GOOGLE &&
 					(editorUi.stateArg == null || editorUi.stateArg.folderId == null))) ?  editorUi.mode : null;
 				
@@ -3873,6 +3902,21 @@ var CreateDialog = function(editorUi, title, createFn, cancelFn, dlgTitle, btnLa
 			
 			addLogo(IMAGE_PATH + '/onedrive-logo.svg', mxResources.get('oneDrive'), App.MODE_ONEDRIVE, 'oneDrive');
 		}
+
+		if (typeof window.BoxClient === 'function')
+		{
+			var boxOption = document.createElement('option');
+			boxOption.setAttribute('value', App.MODE_BOX);
+			mxUtils.write(boxOption, mxResources.get('box'));
+			serviceSelect.appendChild(boxOption);
+			
+			if (editorUi.mode == App.MODE_BOX)
+			{
+				boxOption.setAttribute('selected', 'selected');
+			}
+			
+			addLogo(IMAGE_PATH + '/box-logo.svg', mxResources.get('box'), App.MODE_BOX, 'box');
+		}
 	}
 	
 	if (!Editor.useLocalStorage || urlParams['storage'] == 'device' ||
@@ -3933,6 +3977,10 @@ var CreateDialog = function(editorUi, title, createFn, cancelFn, dlgTitle, btnLa
 				else if (newMode == App.MODE_ONEDRIVE)
 				{
 					ext = editorUi.oneDrive.extension;
+				}
+				else if (newMode == App.MODE_BOX)
+				{
+					ext = editorUi.box.extension;
 				}
 				else if (newMode == App.MODE_DEVICE)
 				{
@@ -5313,6 +5361,7 @@ var LinkDialog = function(editorUi, initialValue, btnLabel, fn)
 		dbBtn.className = 'geBtn';
 		btns.appendChild(dbBtn);
 	}
+	// TODO: do we need code for box here?
 	
 	if (typeof(WL) != 'undefined' && typeof(WL.fileDialog) != 'undefined' && editorUi.oneDrive != null)
 	{
@@ -7399,6 +7448,11 @@ var AuthDialog = function(editorUi, peer, showRememberOption, fn)
 	{
 		service = mxResources.get('oneDrive');
 		img.src = IMAGE_PATH + '/onedrive-logo-white.svg';
+	}
+	else if (peer == editorUi.box)
+	{
+		service = mxResources.get('box');
+		img.src = IMAGE_PATH + '/box-logo-white.svg';
 	}
 	
 	var p = document.createElement('p');

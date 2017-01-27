@@ -2543,7 +2543,8 @@
 		var backends = !this.isOfflineApp() && !this.isOffline() &&
 			(typeof window.DriveClient === 'function' ||
 			typeof window.DropboxClient === 'function' ||
-			typeof window.OneDriveClient === 'function');
+			typeof window.OneDriveClient === 'function' ||
+			typeof window.BoxClient === 'function');
 		
 		var dlg = new CreateDialog(this, filename, mxUtils.bind(this, function(newTitle, mode)
 		{
@@ -2642,7 +2643,8 @@
 		var backends = !this.isOfflineApp() && !this.isOffline() &&
 			(typeof window.DriveClient === 'function' ||
 			typeof window.DropboxClient === 'function' ||
-			typeof window.OneDriveClient === 'function');
+			typeof window.OneDriveClient === 'function' ||
+			typeof window.BoxClient === 'function');
 		
 		var dlg = new CreateDialog(this, filename, mxUtils.bind(this, function(newTitle, mode)
 		{

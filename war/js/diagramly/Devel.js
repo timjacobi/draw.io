@@ -86,6 +86,9 @@ mxscript(drawDevUrl + 'js/diagramly/DropboxClient.js');
 mxscript(drawDevUrl + 'js/diagramly/OneDriveFile.js');
 mxscript(drawDevUrl + 'js/diagramly/OneDriveLibrary.js');
 mxscript(drawDevUrl + 'js/diagramly/OneDriveClient.js');
+mxscript(drawDevUrl + 'js/diagramly/BoxFile.js');
+mxscript(drawDevUrl + 'js/diagramly/BoxLibrary.js');
+mxscript(drawDevUrl + 'js/diagramly/BoxClient.js');
 mxscript(drawDevUrl + 'js/diagramly/ChatWindow.js');
 
 mxscript(drawDevUrl + 'js/diagramly/App.js');

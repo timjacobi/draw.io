@@ -131,6 +131,11 @@ App.MODE_ONEDRIVE = 'onedrive';
 /**
  * Sets the delay for autosave in milliseconds. Default is 2000.
  */
+App.MODE_BOX = 'box';
+
+/**
+ * Sets the delay for autosave in milliseconds. Default is 2000.
+ */
 App.MODE_DEVICE = 'device';
 
 /**
@@ -288,6 +293,8 @@ App.getStoredMode = function()
 						window.OneDriveClient = null;
 					}
 				}
+
+				// TODO: what do we need here for box?
 			}
 			
 			// Loads JSON for older browsers
@@ -575,6 +582,8 @@ App.main = function(callback)
 			{
 				window.OneDriveClient = null;
 			}
+
+			// TODO: what do we need here for box?
 		}
 		
 		if (callback != null)
@@ -863,6 +872,8 @@ App.prototype.init = function()
 
 		initDropboxClient();
 	}
+
+	// TODO: what do we need here for BOX? looks like a new URL param like urlParams['db'] stands for dropbox, where are they defined?
 
 	if (urlParams['embed'] != '1')
 	{
@@ -2486,6 +2497,13 @@ App.prototype.pickFile = function(mode)
 			this.oneDrive.pickFile();
 		}
 	}
+	else if (mode == App.MODE_BOX)
+	{
+		if (this.box != null)
+		{
+			this.box.pickFile();
+		}
+	}
 	else if (mode == App.MODE_GOOGLE)
 	{
 		if (this.drive != null && typeof(google) != 'undefined' && typeof(google.picker) != 'undefined')
@@ -2565,9 +2583,9 @@ App.prototype.pickLibrary = function(mode)
 {
 	mode = (mode != null) ? mode : this.mode;
 	
-	if (mode == App.MODE_GOOGLE || mode == App.MODE_DROPBOX || mode == App.MODE_ONEDRIVE)
+	if (mode == App.MODE_GOOGLE || mode == App.MODE_DROPBOX || mode == App.MODE_ONEDRIVE || mode == App.MODE_BOX)
 	{
-		var peer = (mode == App.MODE_GOOGLE) ? this.drive : ((mode == App.MODE_ONEDRIVE) ? this.oneDrive : this.dropbox);
+		var peer = (mode == App.MODE_GOOGLE) ? this.drive : ((mode == App.MODE_ONEDRIVE) ? this.oneDrive : ((mode == App.MODE_BOX) ? this.box : this.dropbox));
 		
 		if (peer != null)
 		{
@@ -2730,6 +2748,15 @@ App.prototype.saveLibrary = function(name, images, file, mode, noSpin, noReload,
 			else if (mode == App.MODE_ONEDRIVE && this.oneDrive != null && this.spinner.spin(document.body, mxResources.get('inserting')))
 			{
 				this.oneDrive.insertLibrary(name, xml, mxUtils.bind(this, function(newFile)
+				{
+					this.spinner.stop();
+					this.hideDialog(true);
+					this.libraryLoaded(newFile, images);
+				}), error, folderId);
+			}
+			else if (mode == App.MODE_BOX && this.box != null && this.spinner.spin(document.body, mxResources.get('inserting')))
+			{
+				this.box.insertLibrary(name, xml, mxUtils.bind(this, function(newFile)
 				{
 					this.spinner.stop();
 					this.hideDialog(true);
@@ -2949,6 +2976,14 @@ App.prototype.createFile = function(title, data, libs, mode, done, replace, fold
 		else if (mode == App.MODE_DROPBOX && this.dropbox != null)
 		{
 			this.dropbox.insertFile(title, data, mxUtils.bind(this, function(file)
+			{
+				complete();
+				this.fileCreated(file, libs, replace, done);
+			}), error);
+		}
+		else if (mode == App.MODE_BOX && this.box != null)
+		{
+			this.box.insertFile(title, data, mxUtils.bind(this, function(file)
 			{
 				complete();
 				this.fileCreated(file, libs, replace, done);
@@ -3175,6 +3210,10 @@ App.prototype.loadFile = function(id, sameWindow, file)
 				{
 					peer = this.oneDrive;
 				}
+				else if (id.charAt(0) == 'B')
+				{
+					peer = this.box;
+				}
 
 				id = decodeURIComponent(id.substring(1));
 				
@@ -3261,6 +3300,10 @@ App.prototype.getLibraryStorageHint = function(file)
 	else if (file.constructor == OneDriveLibrary)
 	{
 		tip += ' (' + mxResources.get('oneDrive') + ')';
+	}
+	else if (file.constructor == BoxLibrary)
+	{
+		tip += ' (' + mxResources.get('box') + ')';
 	}
 	else if (file.constructor == StorageLibrary)
 	{
@@ -3393,6 +3436,13 @@ App.prototype.restoreLibraries = function()
 									if (this.oneDrive != null && this.oneDrive.getUser() != null)
 									{
 										peer = this.oneDrive;
+									}
+								}
+								else if (service == 'B')
+								{
+									if (this.box != null && this.box.getUser() != null)
+									{
+										peer = this.box;
 									}
 								}
 								
@@ -3591,6 +3641,7 @@ App.prototype.pickFolder = function(mode, fn, enabled)
 			}
 		}));
 	}
+	// TODO: do we need code here for box?
 	else
 	{
 		EditorUi.prototype.pickFolder.apply(this, arguments);
@@ -3673,6 +3724,22 @@ App.prototype.exportFile = function(data, filename, mimeType, base64Encoded, mod
 				this.spinner.stop();
 				this.handleError(resp);
 			}), false, folderId);
+		}
+	}
+	else if (mode == App.MODE_BOX)
+	{
+		if (this.box != null && this.spinner.spin(document.body, mxResources.get('saving')))
+		{
+			this.box.insertFile(filename, (base64Encoded) ? this.base64ToBlob(data, mimeType) :
+				data, mxUtils.bind(this, function()
+			{
+				this.spinner.stop();
+			}), mxUtils.bind(this, function(resp)
+			{
+				this.spinner.stop();
+				this.handleError(resp);
+			}), false, folderId);
+			// TODO: check if we really need to pass false, folderId here
 		}
 	}
 };
@@ -3911,6 +3978,10 @@ App.prototype.updateHeader = function()
 				{
 					this.appIcon.style.backgroundImage = 'url(' + IMAGE_PATH + '/onedrive-logo-white.svg)';
 				}
+				else if (mode == App.MODE_BOX)
+				{
+					this.appIcon.style.backgroundImage = 'url(' + IMAGE_PATH + '/box-logo-white.svg)';
+				}
 			}
 		}));
 		
@@ -4148,7 +4219,8 @@ App.prototype.updateUserElement = function()
 {
 	if ((this.drive == null || this.drive.getUser() == null) &&
 		(this.oneDrive == null || this.oneDrive.getUser() == null) &&
-		(this.dropbox == null || this.dropbox.getUser() == null))
+		(this.dropbox == null || this.dropbox.getUser() == null) &&
+		(this.box == null || this.box.getUser() == null))
 	{
 		if (this.userElement != null)
 		{
@@ -4384,6 +4456,36 @@ App.prototype.updateUserElement = function()
 							}
 						}));
 					}
+
+					if (this.box != null)
+					{
+						addUser(this.box.getUser(), IMAGE_PATH + '/box-logo.svg', mxUtils.bind(this, function()
+						{
+							var file = this.getCurrentFile();
+
+							if (file != null && file.constructor == BoxFile)
+							{
+								var doLogout = mxUtils.bind(this, function()
+								{
+									this.box.logout();
+									window.location.hash = '';
+								});
+								
+								if (!file.isModified())
+								{
+									doLogout();
+								}
+								else
+								{
+									this.confirm(mxResources.get('allChangesLost'), doLogout);
+								}
+							}
+							else
+							{
+								this.box.logout();
+							}
+						}));
+					}
 					
 					if (!connected)
 					{
@@ -4423,6 +4525,10 @@ App.prototype.updateUserElement = function()
 		else if (this.dropbox != null && this.dropbox.getUser() != null)
 		{
 			user = this.dropbox.getUser();
+		}
+		else if (this.box != null && this.box.getUser() != null)
+		{
+			user = this.box.getUser();
 		}
 		
 		if (user != null)

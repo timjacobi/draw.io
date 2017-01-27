@@ -58,6 +58,8 @@
 				(((urlParams['embed'] != '1' && urlParams['od'] != '0') || (urlParams['embed'] == '1' &&
 				urlParams['od'] == '1')) && !navigator.userAgent.match(/(iPad|iPhone|iPod)/g) &&
 				(navigator.userAgent.indexOf('MSIE') < 0 || document.documentMode >= 10));
+		// TODO, how do we determine this?
+		var boxEnabled = true;
 
 		if (!editorUi.isOffline())
 		{
@@ -1341,6 +1343,20 @@
 					// do nothing
 				}, parent, null, false);
 			}
+			if (editorUi.box != null)
+			{
+				menu.addItem(mxResources.get('box') + '...', null, function()
+				{
+					pickFileFromService(editorUi.box);
+				}, parent);
+			}
+			else if (boxEnabled)
+			{
+				menu.addItem(mxResources.get('box') + ' (' + mxResources.get('loading') + '...)', null, function()
+				{
+					// do nothing
+				}, parent, null, false);
+			}
 			
 			menu.addSeparator(parent);
 
@@ -1538,7 +1554,7 @@
 		editorUi.actions.addAction('moveToFolder...', mxUtils.bind(this, function()
 		{
 			var file = editorUi.getCurrentFile();
-			
+			// TODO: do we need to check for box?
 			if (file.getMode() == App.MODE_GOOGLE || file.getMode() == App.MODE_ONEDRIVE)
 			{
 				editorUi.pickFolder(file.getMode(), mxUtils.bind(this, function(folderId)
@@ -1771,6 +1787,7 @@
 						{
 							modeKey = 'oneDrive';
 						}
+						// TODO: do we need this for box?
 						
 						menu.addItem(entry.title + ' (' + mxResources.get(modeKey) + ')', null, function()
 						{
@@ -1830,6 +1847,20 @@
 			else if (oneDriveEnabled)
 			{
 				menu.addItem(mxResources.get('oneDrive') + ' (' + mxResources.get('loading') + '...)', null, function()
+				{
+					// do nothing
+				}, parent, null, false);
+			}
+			if (editorUi.box != null)
+			{
+				menu.addItem(mxResources.get('box') + '...', null, function()
+				{
+					editorUi.pickFile(App.MODE_BOX);
+				}, parent);
+			}
+			else if (boxEnabled)
+			{
+				menu.addItem(mxResources.get('box') + ' (' + mxResources.get('loading') + '...)', null, function()
 				{
 					// do nothing
 				}, parent, null, false);
@@ -1927,6 +1958,21 @@
 					// do nothing
 				}, parent, null, false);
 			}
+
+			if (editorUi.box != null)
+			{
+				menu.addItem(mxResources.get('box') + '...', null, function()
+				{
+					editorUi.showLibraryDialog(null, null, null, null, App.MODE_BOX);
+				}, parent);
+			}
+			else if (boxEnabled)
+			{
+				menu.addItem(mxResources.get('box') + ' (' + mxResources.get('loading') + '...)', null, function()
+				{
+					// do nothing
+				}, parent, null, false);
+			}
 			
 			menu.addSeparator(parent);
 
@@ -1989,6 +2035,21 @@
 			else if (oneDriveEnabled)
 			{
 				menu.addItem(mxResources.get('oneDrive') + ' (' + mxResources.get('loading') + '...)', null, function()
+				{
+					// do nothing
+				}, parent, null, false);
+			}
+
+			if (editorUi.box != null)
+			{
+				menu.addItem(mxResources.get('box') + '...', null, function()
+				{
+					editorUi.pickLibrary(App.MODE_BOX);
+				}, parent);
+			}
+			else if (boxEnabled)
+			{
+				menu.addItem(mxResources.get('box') + ' (' + mxResources.get('loading') + '...)', null, function()
 				{
 					// do nothing
 				}, parent, null, false);
@@ -2228,6 +2289,7 @@
 						{
 							this.addMenuItems(menu, ['moveToFolder'], parent);
 						}
+						// TODO: do we need this for BOX?
 					}
 				}
 				
