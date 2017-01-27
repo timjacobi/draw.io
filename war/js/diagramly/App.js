@@ -2376,7 +2376,7 @@ App.prototype.showSplash = function(force)
 			showSecondDialog();
 		}));
 		
-		this.showDialog(dlg.container, (isLocalStorage && urlParams['browser'] == '1') ? 480 : 380, 300, true, false);
+		this.showDialog(dlg.container, (isLocalStorage && urlParams['browser'] == '1') ? 580 : 480, 300, true, false);
 		dlg.init();
 	}
 	else if (urlParams['create'] == null)
