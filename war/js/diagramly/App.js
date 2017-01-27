@@ -304,7 +304,7 @@ App.getStoredMode = function()
 							window.location.hash.substring(0, 2) == '#B'))
 						{
 							// Box don't provide a client, only an API so we load a fetch polyfill which let's us talk to the API
-							mxscript('https://unpkg.com/whatwg-fetch', null, 'boxjs', App.BOX_APPKEY);
+							mxscript('https://unpkg.com/whatwg-fetch', null, 'boxjs');
 						}
 						else if (urlParams['chrome'] == '0')
 						{
@@ -897,7 +897,31 @@ App.prototype.init = function()
 
 	if (urlParams['embed'] != '1' || urlParams['box'] == '1')
 	{
-		// BOXTODO: Initialize Box Client Here
+		/**
+		 * Creates onedrive client if all required libraries are available.
+		 */
+		var initBoxClient = mxUtils.bind(this, function()
+		{
+			if (typeof fetch !== 'undefined')
+			{
+				this.box = new BoxClient(this);
+				
+				this.box.addListener('userChanged', mxUtils.bind(this, function()
+				{
+					this.updateUserElement();
+					this.restoreLibraries();
+				}))
+				
+				// Notifies listeners of new client
+				this.fireEvent(new mxEventObject('clientLoaded', 'client', this.box));
+			}
+			else if (window.DrawBoxClientCallback == null)
+			{
+				window.DrawBoxClientCallback = initBoxClient;
+			}
+		});
+
+		initBoxClient();
 	}
 
 	if (urlParams['embed'] != '1')
