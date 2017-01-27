@@ -303,8 +303,7 @@ App.getStoredMode = function()
 						if (App.mode == App.MODE_BOX || (window.location.hash != null &&
 							window.location.hash.substring(0, 2) == '#B'))
 						{
-							// Box don't provide a client, only an API so we load a fetch polyfill which let's us talk to the API
-							mxscript('https://unpkg.com/whatwg-fetch', null, 'boxjs');
+							mxscript('https://cdn01.boxcdn.net/js/static/select.js', null, 'boxjs');
 						}
 						else if (urlParams['chrome'] == '0')
 						{
