@@ -64,6 +64,7 @@ bottom=Dno
 bottomAlign=Poravnanje pri dnu
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Pretraživač
 bulletedList=Numerisana lista

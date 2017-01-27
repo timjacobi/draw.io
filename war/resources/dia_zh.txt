@@ -64,6 +64,7 @@ bottom=底
 bottomAlign=下对齐
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=浏览器
 bulletedList=项目符号列表

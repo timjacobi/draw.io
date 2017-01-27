@@ -64,6 +64,7 @@ bottom=En bas
 bottomAlign=Aligner en bas
 bottomLeft=Aligner en bas à gauche
 bottomRight=Aligner en bas à droite
+box=Box
 bpmn=BPMN
 browser=Navigateur
 bulletedList=Liste à puces

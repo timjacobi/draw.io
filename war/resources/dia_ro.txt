@@ -64,6 +64,7 @@ bottom=Bază
 bottomAlign=Aliniere in partea de jos
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Browser
 bulletedList=Listă marcaje

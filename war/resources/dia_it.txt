@@ -64,6 +64,7 @@ bottom=In basso
 bottomAlign=Allinea in basso
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Browser
 bulletedList=Elenco puntato

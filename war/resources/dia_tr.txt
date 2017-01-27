@@ -64,6 +64,7 @@ bottom=Alt hiza
 bottomAlign=Altı hizala
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Tarayıcı
 bulletedList=Madde imli liste

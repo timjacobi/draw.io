@@ -64,6 +64,7 @@ bottom=Nederdel
 bottomAlign=Justera nederdel
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Browser
 bulletedList=Punktlista

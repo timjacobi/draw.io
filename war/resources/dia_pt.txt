@@ -64,6 +64,7 @@ bottom=Fundo
 bottomAlign=Alinhar ao fundo
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Navegador
 bulletedList=Lista com marcas

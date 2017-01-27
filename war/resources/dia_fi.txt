@@ -64,6 +64,7 @@ bottom=Alas
 bottomAlign=Tasaa alas
 bottomLeft=Alas vasemmalle
 bottomRight=Alas oikealle
+box=Box
 bpmn=BPMN
 browser=Selain
 bulletedList=Luettelomerkkilista

@@ -64,6 +64,7 @@ bottom=‫תחתית‬
 bottomAlign=‫ישר תחתית‬
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=‫דפדפן‬
 bulletedList=‫רשימת בולטים‬

@@ -64,6 +64,7 @@ bottom=ด้านล่าง
 bottomAlign=จัดเรียงแนวเดียวกันด้านล่าง
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=เบราส์เซอร์
 bulletedList=รายการแบบมีจุดนำ

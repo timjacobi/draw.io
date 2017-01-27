@@ -64,6 +64,7 @@ bottom=Abaix
 bottomAlign=Alineació inferior
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Navegador
 bulletedList=Llista de vinyetes

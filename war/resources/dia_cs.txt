@@ -64,6 +64,7 @@ bottom=Dolní
 bottomAlign=Zarovnání dolů
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Prohlížeč
 bulletedList=Seznam v bodech

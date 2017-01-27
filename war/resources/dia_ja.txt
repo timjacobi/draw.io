@@ -64,6 +64,7 @@ bottom=下
 bottomAlign=下端揃え
 bottomLeft=下端左
 bottomRight=下端右
+box=Box
 bpmn=BPMN
 browser=ブラウザ
 bulletedList=箇条書きリスト

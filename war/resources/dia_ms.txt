@@ -64,6 +64,7 @@ bottom=Bawah
 bottomAlign=Jajaran bawah
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Pelayar
 bulletedList=Senarai berbulet

@@ -64,6 +64,7 @@ bottom=Alumine
 bottomAlign=Alaääre joondamine
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Brauser
 bulletedList=Nummerdamata loetelu

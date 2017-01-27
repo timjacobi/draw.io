@@ -64,6 +64,7 @@ bottom=Bund
 bottomAlign=Bund
 bottomLeft=Nederst til venstre
 bottomRight=Nederst til højre
+box=Box
 bpmn=BPMN
 browser=Browser
 bulletedList=Punktopstilling

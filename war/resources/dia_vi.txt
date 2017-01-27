@@ -64,6 +64,7 @@ bottom=Đáy
 bottomAlign=Căn lề đáy
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Duyệt
 bulletedList=Danh sách chấm đầu dòng

@@ -64,6 +64,7 @@ bottom=Κάτω μέρος
 bottomAlign=Στοίχιση Κάτω Μέρους
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Περιηγητής
 bulletedList=Λίστα με κουκκίδες

@@ -64,6 +64,7 @@ bottom=Bottom
 bottomAlign=Bottom Align
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Browser
 bulletedList=Bulleted List

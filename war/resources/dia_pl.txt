@@ -64,6 +64,7 @@ bottom=Dół
 bottomAlign=Wyrównanie do dołu
 bottomLeft=Lewy dół
 bottomRight=Prawy dół
+box=Box
 bpmn=BPMN
 browser=Przeglądarka
 bulletedList=Lista wypunktowana

@@ -64,6 +64,7 @@ bottom=아래쪽
 bottomAlign=아래로  정렬
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=브라우저
 bulletedList=글머리 기호

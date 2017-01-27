@@ -64,6 +64,7 @@ bottom=Снизу
 bottomAlign=По нижнему краю
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=Браузер
 bulletedList=Маркированный список

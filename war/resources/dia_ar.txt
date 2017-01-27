@@ -64,6 +64,7 @@ bottom=‫أسفل‬
 bottomAlign=‫محاذاة إلى الأسفل‬
 bottomLeft=Bottom Left
 bottomRight=Bottom Right
+box=Box
 bpmn=BPMN
 browser=‫متصفح‬
 bulletedList=‫قائمة ‬

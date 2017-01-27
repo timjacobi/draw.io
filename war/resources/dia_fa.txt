@@ -64,6 +64,7 @@ bottom=‫پایین‬
 bottomAlign=‫تراز پایین‬
 bottomLeft=‫پایین چپ‬
 bottomRight=‫پایین راست‬
+box=Box
 bpmn=BPMN
 browser=‫مرورگر‬
 bulletedList=Bulleted List
