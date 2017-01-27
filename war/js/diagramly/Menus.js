@@ -58,8 +58,10 @@
 				(((urlParams['embed'] != '1' && urlParams['od'] != '0') || (urlParams['embed'] == '1' &&
 				urlParams['od'] == '1')) && !navigator.userAgent.match(/(iPad|iPhone|iPod)/g) &&
 				(navigator.userAgent.indexOf('MSIE') < 0 || document.documentMode >= 10));
-		// TODO, how do we determine this?
-		var boxEnabled = true;
+
+		var boxEnabled = ((urlParams['embed'] != '1' && urlParams['box'] != '0') ||
+				(urlParams['embed'] == '1' && urlParams['box'] == '1')) && mxClient.IS_SVG &&
+				isLocalStorage && navigator.userAgent.indexOf('MSIE') < 0;
 
 		if (!editorUi.isOffline())
 		{
