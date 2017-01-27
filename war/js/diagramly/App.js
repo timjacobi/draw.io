@@ -293,8 +293,30 @@ App.getStoredMode = function()
 						window.OneDriveClient = null;
 					}
 				}
-
-				// TODO: what do we need here for box?
+			
+				if (typeof window.BoxClient === 'function')
+				{
+					if (urlParams['box'] != '0' && isSvgBrowser &&
+						(document.documentMode == null || document.documentMode > 9))
+					{
+						// Immediately loads client
+						if (App.mode == App.MODE_BOX || (window.location.hash != null &&
+							window.location.hash.substring(0, 2) == '#B'))
+						{
+							// Box don't provide a client, only an API so we load a fetch polyfill which let's us talk to the API
+							mxscript('https://unpkg.com/whatwg-fetch', null, 'boxjs', App.BOX_APPKEY);
+						}
+						else if (urlParams['chrome'] == '0')
+						{
+							window.BoxClient = null;
+						}
+					}
+					else
+					{
+						// Disables loading of client
+						window.BoxClient = null;
+					}
+				}
 			}
 			
 			// Loads JSON for older browsers
@@ -873,7 +895,10 @@ App.prototype.init = function()
 		initDropboxClient();
 	}
 
-	// TODO: what do we need here for BOX? looks like a new URL param like urlParams['db'] stands for dropbox, where are they defined?
+	if (urlParams['embed'] != '1' || urlParams['box'] == '1')
+	{
+		// TODO: Initialize Box Client Here
+	}
 
 	if (urlParams['embed'] != '1')
 	{
