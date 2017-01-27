@@ -8,11 +8,11 @@
  * @param {number} x X-coordinate of the point.
  * @param {number} y Y-coordinate of the point.
  */
-// TODO: Dropbox uses stat, OneDrive uses meta, what does Box need?
+// BOXTODO: Dropbox uses stat, OneDrive uses meta, what does Box need?
 BoxFile = function(ui, data, meta)
 {
 	DrawioFile.call(this, ui, data);
-	// TODO: Dropbox uses stat, OneDrive uses meta, what does Box need?
+	// BOXTODO: Dropbox uses stat, OneDrive uses meta, what does Box need?
 	this.meta = meta;
 };
 
@@ -27,7 +27,7 @@ mxUtils.extend(BoxFile, DrawioFile);
  */
 BoxFile.prototype.getHash = function()
 {
-    // TODO: is this.meta.id what we need here?
+    // BOXTODO: is this.meta.id what we need here?
 	return 'B' + encodeURIComponent(this.meta.id);
 };
 
@@ -58,7 +58,7 @@ BoxFile.prototype.isAutosaveOptional = function()
  */
 BoxFile.prototype.getTitle = function()
 {
-	// TODO: what do we need to return here?
+	// BOXTODO: what do we need to return here?
     return this.meta.name;
 };
 
@@ -116,7 +116,7 @@ BoxFile.prototype.doSave = function(title, success, error)
  */
 BoxFile.prototype.saveFile = function(title, revision, success, error)
 {
-	// TODO: implement this, seems like every service handles this differently, what is needed for box?
+	// BOXTODO: implement this, seems like every service handles this differently, what is needed for box?
 };
 
 /**
@@ -127,18 +127,18 @@ BoxFile.prototype.saveFile = function(title, revision, success, error)
  */
 BoxFile.prototype.rename = function(title, success, error)
 {
-    // TODO is meta what we need?
+    // BOXTODO is meta what we need?
 	this.ui.box.renameFile(this, title, mxUtils.bind(this, function(meta)
 	{
 		if (!this.hasSameExtension(title, this.getTitle()))
 		{
-			// TODO is meta what we need?
+			// BOXTODO is meta what we need?
             this.meta = meta;
 			this.save(true, success, error);
 		}
 		else
 		{
-			// TODO is meta what we need?
+			// BOXTODO is meta what we need?
             this.meta = meta;
 			this.descriptorChanged();
 			

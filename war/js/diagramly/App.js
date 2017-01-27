@@ -605,7 +605,7 @@ App.main = function(callback)
 				window.OneDriveClient = null;
 			}
 
-			// TODO: what do we need here for box?
+			// BOXTODO: what do we need here for box?
 		}
 		
 		if (callback != null)
@@ -897,7 +897,7 @@ App.prototype.init = function()
 
 	if (urlParams['embed'] != '1' || urlParams['box'] == '1')
 	{
-		// TODO: Initialize Box Client Here
+		// BOXTODO: Initialize Box Client Here
 	}
 
 	if (urlParams['embed'] != '1')
@@ -3666,7 +3666,7 @@ App.prototype.pickFolder = function(mode, fn, enabled)
 			}
 		}));
 	}
-	// TODO: do we need code here for box?
+	// BOXTODO: do we need code here for box?
 	else
 	{
 		EditorUi.prototype.pickFolder.apply(this, arguments);
@@ -3764,7 +3764,7 @@ App.prototype.exportFile = function(data, filename, mimeType, base64Encoded, mod
 				this.spinner.stop();
 				this.handleError(resp);
 			}), false, folderId);
-			// TODO: check if we really need to pass false, folderId here
+			// BOXTODO: check if we really need to pass false, folderId here
 		}
 	}
 };

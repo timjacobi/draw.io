@@ -23,4 +23,4 @@ BoxClient = function(editorUi)
 // Extends mxEventSource
 mxUtils.extend(BoxClient, mxEventSource);
 
-// TODO: add missing implementation
+// BOXTODO: add missing implementation

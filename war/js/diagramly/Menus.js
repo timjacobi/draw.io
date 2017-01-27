@@ -1556,7 +1556,7 @@
 		editorUi.actions.addAction('moveToFolder...', mxUtils.bind(this, function()
 		{
 			var file = editorUi.getCurrentFile();
-			// TODO: do we need to check for box?
+			// BOXTODO: do we need to check for box?
 			if (file.getMode() == App.MODE_GOOGLE || file.getMode() == App.MODE_ONEDRIVE)
 			{
 				editorUi.pickFolder(file.getMode(), mxUtils.bind(this, function(folderId)
@@ -1789,7 +1789,7 @@
 						{
 							modeKey = 'oneDrive';
 						}
-						// TODO: do we need this for box?
+						// BOXTODO: do we need this for box?
 						
 						menu.addItem(entry.title + ' (' + mxResources.get(modeKey) + ')', null, function()
 						{
@@ -2291,7 +2291,7 @@
 						{
 							this.addMenuItems(menu, ['moveToFolder'], parent);
 						}
-						// TODO: do we need this for BOX?
+						// BOXTODO: do we need this for BOX?
 					}
 				}
 				

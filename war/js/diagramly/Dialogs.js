@@ -227,7 +227,6 @@ var StorageDialog = function(editorUi, fn)
 
 	if (typeof window.BoxClient === 'function')
 	{
-		// TODO: does mxResource for box exist?
 		addLogo(IMAGE_PATH + '/box-logo.svg', mxResources.get('box'), App.MODE_BOX, 'box');
 	}
 	
@@ -3353,7 +3352,7 @@ var NewDialog = function(editorUi, compact, showName, callback)
 				
 			if (title != null && title.length > 0)
 			{
-				// TODO: do we need to include box in this check?
+				// BOXTODO: do we need to include box in this check?
 				var tempMode = (editorUi.mode == App.MODE_ONEDRIVE || (editorUi.mode == App.MODE_GOOGLE &&
 					(editorUi.stateArg == null || editorUi.stateArg.folderId == null))) ?  editorUi.mode : null;
 				
@@ -5361,7 +5360,7 @@ var LinkDialog = function(editorUi, initialValue, btnLabel, fn)
 		dbBtn.className = 'geBtn';
 		btns.appendChild(dbBtn);
 	}
-	// TODO: do we need code for box here?
+	// BOXTODO: do we need code for box here?
 	
 	if (typeof(WL) != 'undefined' && typeof(WL.fileDialog) != 'undefined' && editorUi.oneDrive != null)
 	{
